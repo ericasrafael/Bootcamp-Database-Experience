@@ -1,6 +1,7 @@
 #  Modelagem Conceitual - Refinamento E-commerce 
 ![img drawio](https://user-images.githubusercontent.com/91800929/190312323-9e635919-eb7b-4491-98c5-36284f9ebdbe.png)
 ![image](https://user-images.githubusercontent.com/91800929/191736176-09842f1f-e912-46ca-b3aa-9f3f6b960afd.png)
+![image](https://user-images.githubusercontent.com/91800929/191736596-3c8141c1-b053-4c16-a150-b4d94fe229be.png)
 
 ### Descrição da Modelagem Conceitual:
 
