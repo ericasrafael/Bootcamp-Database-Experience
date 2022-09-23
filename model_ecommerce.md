@@ -1,6 +1,7 @@
 #  Modelagem Conceitual - Refinamento E-commerce 
 ![img drawio](https://user-images.githubusercontent.com/91800929/190312323-9e635919-eb7b-4491-98c5-36284f9ebdbe.png)
 
+
 ### Descrição da Modelagem Conceitual:
 
 Tem-se um escopo de Venda de Produtos na primeira etapa do projeto de Banco de Dados;
