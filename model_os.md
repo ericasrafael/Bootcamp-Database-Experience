@@ -2,14 +2,11 @@
 
 - Modelagem puramente conceitual 
 
-
 ![Diagrama sem nome drawio](https://user-images.githubusercontent.com/91800929/190407762-79ca83dd-d20c-4903-96f8-a4840ebb9c60.png)
-
 
 - Modelagem EER
 
-
-![model-EER-OS](https://user-images.githubusercontent.com/91800929/192072204-4eb83dde-79ab-48dc-a66f-1d3b9958d3bd.png)
+![model_os_EER](https://user-images.githubusercontent.com/91800929/192097059-a688969a-8fcd-4294-8cd1-2fa127cd1795.png)
 
 ### Descrição da Modelagem Conceitual:
 
