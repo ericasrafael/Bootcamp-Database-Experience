@@ -1,6 +1,12 @@
 #  Modelagem Conceitual -  OS de Oficina Mecânica
 
+- Modelagem puramente conceitual 
+
 ![Diagrama sem nome drawio](https://user-images.githubusercontent.com/91800929/190407762-79ca83dd-d20c-4903-96f8-a4840ebb9c60.png)
+
+- Modelagem EER
+
+![model_os_EER](https://user-images.githubusercontent.com/91800929/192097059-a688969a-8fcd-4294-8cd1-2fa127cd1795.png)
 
 ### Descrição da Modelagem Conceitual:
 
