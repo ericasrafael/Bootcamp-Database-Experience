@@ -30,7 +30,7 @@ create table clients(
 
 alter table clients auto_increment=1;
 
-create table client_CPF(
+create table client_cpf(
 	idClient_CPF int auto_increment primary key,
     idClient int,
     CPF VARCHAR(11) not null,
@@ -38,7 +38,9 @@ create table client_CPF(
     constraint unique_cpf_client unique(CPF)
 );
 
-create table client_CNPJ(
+alter table client_CPF auto_increment=1;
+
+create table client_cnpj(
 	idClient_CNPJ int auto_increment primary key,
     idClient int,
     CNPJ VARCHAR(15) not null,
@@ -46,6 +48,9 @@ create table client_CNPJ(
     constraint fk_client_cnpj foreign key (idClient) references clients(idClient),
     constraint unique_cnpj_client unique(CNPJ)
 );
+
+alter table client_CNPJ auto_increment=1;
+
 
 -- desc clients;
 
@@ -62,6 +67,8 @@ create table products(
     size varchar(20)
 );
 
+alter table products auto_increment=1;
+
 -- payment
 -- REFINAMENTO: forma de pagamento, cada forma possui atributos específicos
 -- esecializar: cada subclasse vira uma entidade, e recebe uma FK da classe genérica
@@ -73,6 +80,8 @@ create table payments(
     idPayment int,
     primary key(idPayment)
 );
+
+alter table payments auto_increment=1;
 
 -- subclasses: pix, boleto, cartão de crédito
 
@@ -226,8 +235,6 @@ values
 (5,'987456310'),
 (6,'654789123');
 
-select * from client_CPF;
-
 insert into client_CNPJ(idClient, CNPJ, SocialName)
 values
 (7,'45997418000153','Coca Cola Indústrias Ltda'),
@@ -330,26 +337,35 @@ select count(*) from clients;
 
 select * from clients c, orders o where c.idClient = o.idClient; -- onde id cliente está em pedidos
 
-insert into orders(idClient, orderstatusc, orderDescription, sendValue, idPayment)
-values (2,default, 'Compra Via Aplicativo', default, 1);
+insert into orders(idClient, orderstatusc, orderDescription, sendValue, idPayment) values (2,default, 'Compra Via Aplicativo', default, 1);
+insert into payments values(5);
+insert into payment_cartao(idPayment,banco,CCV,validade, conta) values (5, 'CAIXA',001,'2023-05-12',000198654);
 
 select * from product_order; -- products orders
 
 -- somente clientes que fizeram pedidos, contagem de pedidos
-
+select * from payment_boleto;
 select Fname, c.idClient, count(*) as number_of_orders from clients c 
 join orders o using(idClient)
 join product_order po using(idOrder)
 group by c.idClient;
 
+-- clientes e seus produtos comprados por boleto
+select *
+from orders o 
+left join payments p using(idPayment)
+left join payment_boleto pb using(idPayment)
+left join clients c using(idClient)
+;
 
 
 
+select * from payments 
+left join payment_boleto using(idPayment)
+left join payment_cartao using(idPayment)
+left join payment_pix using(idPayment);
 
-
-
-
-
+select * from payment_cartao
 
 
 

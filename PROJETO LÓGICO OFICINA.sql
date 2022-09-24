@@ -236,4 +236,4 @@ join veiculo using(idCliente)
 join os using(idVeiculo)
 where status_serviço like '%Cancelado%';
 
-select * from veiculo;
+select * from mecanico;
