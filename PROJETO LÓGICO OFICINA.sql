@@ -222,7 +222,7 @@ create table os_conserto(
     constraint fk_conserto_os foreign key (idOS) references os(idOs)
 );
 
-insert into os_revisao( idOs, descriçao, mao_de_obra ) values 
+insert into os_conserto( idOs, descriçao, mao_de_obra ) values 
 (10, 'Conserto Filtro de óleo', 60 ),
 (8, 'Conserto Embreagem', 20 ),
 (7, 'Conserto Filtro de óleo', 20 ),
@@ -230,10 +230,63 @@ insert into os_revisao( idOs, descriçao, mao_de_obra ) values
 (11, 'Conserto Volante', 50 );
 
 select * from os; -- veiculo
+select * from mecanico; 
+select * from veiculo; 
+select * from peça;
+select * from peças_os;
+select * from os_conserto;
+select * from os_revisao;
+select * from cliente;
 
 select * from cliente 
 join veiculo using(idCliente) 
 join os using(idVeiculo)
 where status_serviço like '%Cancelado%';
 
-select * from mecanico;
+
+-- cliente e mecânicos de serviços cancelados
+
+select concat( c.nome,' ', c.sobrenome ) nome_cliente,
+	   m.nome as nome_mecanico, modelo
+from mecanico m
+join veiculo using(idMecanico)
+join os using(idVeiculo)
+join cliente c using(idCliente)
+where status_serviço like '%Cancelado%';
+
+-- serviços e tipo de cliente que não necessitaram de peças
+
+select *
+from os o
+where not exists (	select * from peças_os as po where o.idOs = po.idOs ); 
+
+-- listando quantos veículos tem cada cliente 
+
+select 
+concat(nome,' ',sobrenome) cliente,
+count(*) as numero_de_veiculos
+from cliente
+left join veiculo using(idCliente)
+group by nome
+order by numero_de_veiculos desc;
+
+-- comparação valor estimado e valor real cobrado ao cliente 
+
+select 
+concat(c.nome,' ',c.sobrenome) as Cliente,
+o.idOs,
+v.modelo,
+o.valor_total_estimado, 
+round((quantidade*valor_da_peça + (coalesce(ore.mao_de_obra , 0) + coalesce(oco.mao_de_obra,0))),2) as Valor
+from veiculo v 
+join os o using(idVeiculo)
+join peças_os po using(idOs)
+join peça p using(idPeça)
+join cliente c using(idCliente)
+left join os_revisao ore using(idOs)
+left join os_conserto oco using(idOs)
+where o.status_serviço not in ('Cancelado pelo Cliente')
+group by o.idOs;
+
+
+
